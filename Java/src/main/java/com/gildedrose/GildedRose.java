@@ -11,7 +11,7 @@ class GildedRose {
     public void updateQuality() {
         for (Item currentItem : items) {
             if (hasDecreasingQuality(currentItem)) {
-                if (!isSulfuras(currentItem)) {
+                if (!isLegendary(currentItem)) {
                     decreaseQualityUntilZero(currentItem);
                 }
             } else {
@@ -21,14 +21,14 @@ class GildedRose {
                     }
             }
 
-            if (!isSulfuras(currentItem)) {
+            if (!isLegendary(currentItem)) {
                 currentItem.sellIn = currentItem.sellIn - 1;
             }
 
             if (itemExpired(currentItem)) {
                 if (!isAgedBrie(currentItem)) {
                     if (!isBackStagePass(currentItem)) {
-                        if (!isSulfuras(currentItem)) {
+                        if (!isLegendary(currentItem)) {
                             decreaseQualityUntilZero(currentItem);
                         }
                     } else {
@@ -72,7 +72,7 @@ class GildedRose {
         }
     }
 
-    private boolean isSulfuras(Item currentItem) {
+    private boolean isLegendary(Item currentItem) {
         return currentItem.name.equals("Sulfuras, Hand of Ragnaros");
     }
 
