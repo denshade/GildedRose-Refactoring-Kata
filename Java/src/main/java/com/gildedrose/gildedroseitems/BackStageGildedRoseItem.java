@@ -1,4 +1,6 @@
-package com.gildedrose;
+package com.gildedrose.gildedroseitems;
+
+import com.gildedrose.Item;
 
 public class BackStageGildedRoseItem extends GildedRoseItem
 {
@@ -7,7 +9,7 @@ public class BackStageGildedRoseItem extends GildedRoseItem
     }
 
     @Override
-    void updateQuality() {
+    public void updateQuality() {
     increaseQualityWithSaturation(item);
         if (item.sellIn < 11) {
             increaseQualityWithSaturation(item);

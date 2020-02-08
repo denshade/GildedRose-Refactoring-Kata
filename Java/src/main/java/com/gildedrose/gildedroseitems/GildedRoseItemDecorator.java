@@ -1,4 +1,6 @@
-package com.gildedrose;
+package com.gildedrose.gildedroseitems;
+
+import com.gildedrose.Item;
 
 public class GildedRoseItemDecorator
 {

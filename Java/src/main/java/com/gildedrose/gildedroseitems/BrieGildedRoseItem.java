@@ -1,4 +1,6 @@
-package com.gildedrose;
+package com.gildedrose.gildedroseitems;
+
+import com.gildedrose.Item;
 
 public class BrieGildedRoseItem extends GildedRoseItem
 {
@@ -7,7 +9,7 @@ public class BrieGildedRoseItem extends GildedRoseItem
     }
 
     @Override
-    void updateQuality() {
+    public void updateQuality() {
         increaseQualityWithSaturation(item);
     }
 

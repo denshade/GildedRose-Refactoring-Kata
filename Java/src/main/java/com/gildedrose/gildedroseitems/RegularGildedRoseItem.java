@@ -1,4 +1,6 @@
-package com.gildedrose;
+package com.gildedrose.gildedroseitems;
+
+import com.gildedrose.Item;
 
 public class RegularGildedRoseItem extends GildedRoseItem {
     public RegularGildedRoseItem(Item item) {
@@ -13,7 +15,7 @@ public class RegularGildedRoseItem extends GildedRoseItem {
      * Once the sell by date has passed, Quality degrades twice as fast
      */
     @Override
-    void updateQuality() {
+    public void updateQuality() {
         decreaseQualityUntilZero(item);
         if (itemExpired(item)) {
             decreaseQualityUntilZero(item);

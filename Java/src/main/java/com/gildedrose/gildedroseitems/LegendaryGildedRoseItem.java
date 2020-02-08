@@ -1,4 +1,6 @@
-package com.gildedrose;
+package com.gildedrose.gildedroseitems;
+
+import com.gildedrose.Item;
 
 public class LegendaryGildedRoseItem extends GildedRoseItem {
     public LegendaryGildedRoseItem(Item item) {
@@ -9,12 +11,12 @@ public class LegendaryGildedRoseItem extends GildedRoseItem {
      *  "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
      */
     @Override
-    void updateQuality() {
+    public void updateQuality() {
         //do nothing.
     }
 
     @Override
-    void updateSellIn() {
+    public void updateSellIn() {
         //do nothing.
     }
 }

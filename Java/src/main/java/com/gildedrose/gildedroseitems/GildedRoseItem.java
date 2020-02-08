@@ -1,4 +1,6 @@
-package com.gildedrose;
+package com.gildedrose.gildedroseitems;
+
+import com.gildedrose.Item;
 
 abstract public class GildedRoseItem
 {
@@ -9,8 +11,8 @@ abstract public class GildedRoseItem
         this.item = item;
     }
 
-    abstract void updateQuality();
-    void updateSellIn(){
+    public abstract void updateQuality();
+    public void updateSellIn(){
         item.sellIn--;
     }
 
