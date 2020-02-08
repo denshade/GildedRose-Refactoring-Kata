@@ -1,7 +1,6 @@
 package com.gildedrose;
 
 class GildedRose {
-    public static final int SATURATIONMAX = 50;
     Item[] items;
 
     public GildedRose(Item[] items) {
