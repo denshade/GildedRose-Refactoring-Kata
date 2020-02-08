@@ -8,6 +8,7 @@ public class GildedRoseItemDecorator
     private static final String AGED_BRIE = "Aged Brie";
     private static final String HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
 
+
     public GildedRoseItem decorateItem(Item currentItem) {
         GildedRoseItem roseItem;
         if (isAgedBrie(currentItem))
@@ -19,7 +20,10 @@ public class GildedRoseItemDecorator
         } else if (isBackStagePass(currentItem))
         {
             roseItem = new BackStageGildedRoseItem(currentItem);
-        } else {
+        } else if (isConjured(currentItem)) {
+            roseItem = new ConjuredRoseItem(currentItem);
+        }
+        else {
             roseItem = new RegularGildedRoseItem(currentItem);
         }
         return roseItem;
@@ -35,5 +39,8 @@ public class GildedRoseItemDecorator
 
     private boolean isAgedBrie(Item currentItem) {
         return currentItem.name.equals(AGED_BRIE);
+    }
+    private boolean isConjured(Item currentItem) {
+        return currentItem.name.contains("Conjured");
     }
 }
