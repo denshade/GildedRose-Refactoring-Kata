@@ -14,8 +14,7 @@ class GildedRose {
         GildedRoseItemDecorator decorator = new GildedRoseItemDecorator();
         for (Item currentItem : items) {
             GildedRoseItem roseItem = decorator.decorateItem(currentItem);
-            roseItem.updateQuality();
-            roseItem.updateSellIn();
+            roseItem.update();
         }
     }
 

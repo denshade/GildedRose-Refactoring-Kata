@@ -16,6 +16,12 @@ abstract public class GildedRoseItem
         item.sellIn--;
     }
 
+    public void update()
+    {
+        updateQuality();
+        updateSellIn();
+    }
+
     protected void decreaseQualityUntilZero(Item currentItem) {
         if (currentItem.quality > 0) {
             currentItem.quality = currentItem.quality - 1;
