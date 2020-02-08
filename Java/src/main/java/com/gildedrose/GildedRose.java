@@ -10,65 +10,21 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item currentItem : items) {
-            if (hasDecreasingQuality(currentItem)) {
-                if (!isLegendary(currentItem)) {
-                    decreaseQualityUntilZero(currentItem);
-                }
+            GildedRoseItem roseItem;
+            if (isAgedBrie(currentItem))
+            {
+                roseItem = new BrieGildedRoseItem(currentItem);
+            } else if (isLegendary(currentItem))
+            {
+                roseItem = new LegendaryGildedRoseItem(currentItem);
+            } else if (isBackStagePass(currentItem))
+            {
+                roseItem = new BackStageGildedRoseItem(currentItem);
             } else {
-                    increaseQualityWithSaturation(currentItem);
-                    if (isBackStagePass(currentItem)) {
-                        processBackstage(currentItem);
-                    }
+                roseItem = new RegularGildedRoseItem(currentItem);
             }
-
-            if (!isLegendary(currentItem)) {
-                currentItem.sellIn = currentItem.sellIn - 1;
-            }
-
-            if (itemExpired(currentItem)) {
-                if (!isAgedBrie(currentItem)) {
-                    if (!isBackStagePass(currentItem)) {
-                        if (!isLegendary(currentItem)) {
-                            decreaseQualityUntilZero(currentItem);
-                        }
-                    } else {
-                        currentItem.quality = 0;
-                    }
-                } else {
-                    increaseQualityWithSaturation(currentItem);
-                }
-            }
-        }
-    }
-
-    private boolean itemExpired(Item currentItem) {
-        return currentItem.sellIn < 0;
-    }
-
-    private void decreaseQualityUntilZero(Item currentItem) {
-        if (currentItem.quality > 0) {
-            currentItem.quality = currentItem.quality - 1;
-        }
-    }
-
-    private boolean hasDecreasingQuality(Item currentItem) {
-        return !isAgedBrie(currentItem)
-                && !isBackStagePass(currentItem);
-    }
-
-    private void processBackstage(Item currentItem) {
-        if (currentItem.sellIn < 11) {
-            increaseQualityWithSaturation(currentItem);
-        }
-
-        if (currentItem.sellIn < 6) {
-            increaseQualityWithSaturation(currentItem);
-        }
-    }
-
-    private void increaseQualityWithSaturation(Item currentItem) {
-        if (currentItem.quality < SATURATIONMAX) {
-            currentItem.quality = currentItem.quality + 1;
+            roseItem.updateQuality();
+            roseItem.updateSellIn();
         }
     }
 
