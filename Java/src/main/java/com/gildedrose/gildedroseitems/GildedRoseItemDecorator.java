@@ -4,6 +4,10 @@ import com.gildedrose.Item;
 
 public class GildedRoseItemDecorator
 {
+    private static final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
+    private static final String AGED_BRIE = "Aged Brie";
+    private static final String HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
+
     public GildedRoseItem decorateItem(Item currentItem) {
         GildedRoseItem roseItem;
         if (isAgedBrie(currentItem))
@@ -22,14 +26,14 @@ public class GildedRoseItemDecorator
     }
 
     private boolean isLegendary(Item currentItem) {
-        return currentItem.name.equals("Sulfuras, Hand of Ragnaros");
+        return currentItem.name.equals(HAND_OF_RAGNAROS);
     }
 
     private boolean isBackStagePass(Item currentItem) {
-        return currentItem.name.equals("Backstage passes to a TAFKAL80ETC concert");
+        return currentItem.name.equals(BACKSTAGE_PASS);
     }
 
     private boolean isAgedBrie(Item currentItem) {
-        return currentItem.name.equals("Aged Brie");
+        return currentItem.name.equals(AGED_BRIE);
     }
 }
