@@ -1,6 +1,7 @@
 package com.gildedrose;
 
 class GildedRose {
+    public static final int SATURATIONMAX = 50;
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -10,42 +11,43 @@ class GildedRose {
     public void updateQuality() {
         for (Item currentItem : items) {
             if (hasDecreasingQuality(currentItem)) {
-                if (currentItem.quality > 0) {
-                    if (!isSulfuras(currentItem)) {
-                        currentItem.quality = currentItem.quality - 1;
-                    }
+                if (!isSulfuras(currentItem)) {
+                    decreaseQualityUntilZero(currentItem);
                 }
             } else {
-                if (currentItem.quality < 50) {
-                    currentItem.quality = currentItem.quality + 1;
-
+                    increaseQualityWithSaturation(currentItem);
                     if (isBackStagePass(currentItem)) {
                         processBackstage(currentItem);
                     }
-                }
             }
 
             if (!isSulfuras(currentItem)) {
                 currentItem.sellIn = currentItem.sellIn - 1;
             }
 
-            if (currentItem.sellIn < 0) {
+            if (itemExpired(currentItem)) {
                 if (!isAgedBrie(currentItem)) {
                     if (!isBackStagePass(currentItem)) {
-                        if (currentItem.quality > 0) {
-                            if (!isSulfuras(currentItem)) {
-                                currentItem.quality = currentItem.quality - 1;
-                            }
+                        if (!isSulfuras(currentItem)) {
+                            decreaseQualityUntilZero(currentItem);
                         }
                     } else {
                         currentItem.quality = 0;
                     }
                 } else {
-                    if (currentItem.quality < 50) {
-                        currentItem.quality = currentItem.quality + 1;
-                    }
+                    increaseQualityWithSaturation(currentItem);
                 }
             }
+        }
+    }
+
+    private boolean itemExpired(Item currentItem) {
+        return currentItem.sellIn < 0;
+    }
+
+    private void decreaseQualityUntilZero(Item currentItem) {
+        if (currentItem.quality > 0) {
+            currentItem.quality = currentItem.quality - 1;
         }
     }
 
@@ -56,15 +58,17 @@ class GildedRose {
 
     private void processBackstage(Item currentItem) {
         if (currentItem.sellIn < 11) {
-            if (currentItem.quality < 50) {
-                currentItem.quality = currentItem.quality + 1;
-            }
+            increaseQualityWithSaturation(currentItem);
         }
 
         if (currentItem.sellIn < 6) {
-            if (currentItem.quality < 50) {
-                currentItem.quality = currentItem.quality + 1;
-            }
+            increaseQualityWithSaturation(currentItem);
+        }
+    }
+
+    private void increaseQualityWithSaturation(Item currentItem) {
+        if (currentItem.quality < SATURATIONMAX) {
+            currentItem.quality = currentItem.quality + 1;
         }
     }
 
